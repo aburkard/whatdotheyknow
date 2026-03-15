@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Do They Know About Me?</title>
+    <meta name="description" content="See everything the web knows about you — without a single cookie.">
+    <meta property="og:title" content="What Do They Know About Me?">
+    <meta property="og:description" content="See everything the web knows about you — without a single cookie.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="What Do They Know About Me?">
+    <meta name="twitter:description" content="See everything the web knows about you — without a single cookie.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👁</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="grain"></div>
+
+    <main id="app">
+
+        <!-- OPENING -->
+        <section id="opening" class="section section--opening">
+            <div class="section-inner">
+                <p class="opening-pre">You think you're anonymous.</p>
+                <h1 class="opening-title">Let's see what the web<br>knows about you.</h1>
+                <button id="start-btn" class="start-btn">
+                    <span class="start-btn-text">Start</span>
+                    <span class="start-btn-arrow">&darr;</span>
+                </button>
+                <p class="opening-note">No cookies. No accounts. No tricks.</p>
+            </div>
+        </section>
+
+        <!-- THE BASICS -->
+        <section id="basics" class="section section--reveal" data-section="basics">
+            <div class="section-inner">
+                <div class="section-num">01</div>
+                <h2 class="section-title">The Basics</h2>
+                <div class="scan-indicator">
+                    <span class="scan-label">Reading your connection</span>
+                    <div class="scan-bar"><div class="scan-bar-fill"></div></div>
+                </div>
+                <div class="section-content" id="basics-content"></div>
+            </div>
+        </section>
+
+        <!-- YOUR DEVICE -->
+        <section id="device" class="section section--reveal" data-section="device">
+            <div class="section-inner">
+                <div class="section-num">02</div>
+                <h2 class="section-title">Your Device</h2>
+                <div class="scan-indicator">
+                    <span class="scan-label">Inspecting your system</span>
+                    <div class="scan-bar"><div class="scan-bar-fill"></div></div>
+                </div>
+                <div class="section-content" id="device-content"></div>
+            </div>
+        </section>
+
+        <!-- YOUR HARDWARE -->
+        <section id="hardware" class="section section--reveal" data-section="hardware">
+            <div class="section-inner">
+                <div class="section-num">03</div>
+                <h2 class="section-title">Your Hardware</h2>
+                <div class="scan-indicator">
+                    <span class="scan-label">Probing your GPU and processors</span>
+                    <div class="scan-bar"><div class="scan-bar-fill"></div></div>
+                </div>
+                <div class="section-content" id="hardware-content"></div>
+            </div>
+        </section>
+
+        <!-- YOUR NETWORK -->
+        <section id="network" class="section section--reveal" data-section="network">
+            <div class="section-inner">
+                <div class="section-num">04</div>
+                <h2 class="section-title">Your Network</h2>
+                <div class="scan-indicator">
+                    <span class="scan-label">Tracing your connection</span>
+                    <div class="scan-bar"><div class="scan-bar-fill"></div></div>
+                </div>
+                <div class="section-content" id="network-content"></div>
+            </div>
+        </section>
+
+        <!-- YOUR PREFERENCES -->
+        <section id="preferences" class="section section--reveal" data-section="preferences">
+            <div class="section-inner">
+                <div class="section-num">05</div>
+                <h2 class="section-title">Your Preferences</h2>
+                <div class="scan-indicator">
+                    <span class="scan-label">Reading your CSS media queries</span>
+                    <div class="scan-bar"><div class="scan-bar-fill"></div></div>
+                </div>
+                <div class="section-content" id="preferences-content"></div>
+            </div>
+        </section>
+
+        <!-- YOUR FONTS -->
+        <section id="fonts" class="section section--reveal" data-section="fonts">
+            <div class="section-inner">
+                <div class="section-num">06</div>
+                <h2 class="section-title">Your Fonts</h2>
+                <div class="scan-indicator">
+                    <span class="scan-label">Scanning your font library</span>
+                    <div class="scan-bar"><div class="scan-bar-fill"></div></div>
+                </div>
+                <div class="section-content" id="fonts-content"></div>
+            </div>
+        </section>
+
+        <!-- CANVAS FINGERPRINT -->
+        <section id="canvas" class="section section--reveal" data-section="canvas">
+            <div class="section-inner">
+                <div class="section-num">07</div>
+                <h2 class="section-title">Your Canvas Fingerprint</h2>
+                <div class="scan-indicator">
+                    <span class="scan-label">Rendering invisible shapes</span>
+                    <div class="scan-bar"><div class="scan-bar-fill"></div></div>
+                </div>
+                <div class="section-content" id="canvas-content"></div>
+            </div>
+        </section>
+
+        <!-- GOING DEEPER -->
+        <section id="deeper" class="section section--reveal" data-section="deeper">
+            <div class="section-inner">
+                <div class="section-num">08</div>
+                <h2 class="section-title">Going Deeper</h2>
+                <div class="scan-indicator">
+                    <span class="scan-label">Running exotic fingerprint tests</span>
+                    <div class="scan-bar"><div class="scan-bar-fill"></div></div>
+                </div>
+                <div class="section-content" id="deeper-content"></div>
+            </div>
+        </section>
+
+        <!-- YOUR BEHAVIOR -->
+        <section id="behavior" class="section section--reveal" data-section="behavior">
+            <div class="section-inner">
+                <div class="section-num">09</div>
+                <h2 class="section-title">Your Behavior</h2>
+                <div class="scan-indicator">
+                    <span class="scan-label">Analyzing your interactions with this page</span>
+                    <div class="scan-bar"><div class="scan-bar-fill"></div></div>
+                </div>
+                <div class="section-content" id="behavior-content"></div>
+            </div>
+        </section>
+
+        <!-- THE FINGERPRINT -->
+        <section id="fingerprint" class="section section--reveal section--fingerprint" data-section="fingerprint">
+            <div class="section-inner">
+                <div class="section-num">10</div>
+                <h2 class="section-title">Your Fingerprint</h2>
+                <div class="scan-indicator">
+                    <span class="scan-label">Assembling your identity</span>
+                    <div class="scan-bar"><div class="scan-bar-fill"></div></div>
+                </div>
+                <div class="section-content" id="fingerprint-content"></div>
+            </div>
+        </section>
+
+        <!-- YOUR PROFILE -->
+        <section id="profile" class="section section--reveal" data-section="profile">
+            <div class="section-inner">
+                <div class="section-num">11</div>
+                <h2 class="section-title">Your Profile</h2>
+                <div class="scan-indicator">
+                    <span class="scan-label">Assembling a dossier</span>
+                    <div class="scan-bar"><div class="scan-bar-fill"></div></div>
+                </div>
+                <div class="section-content" id="profile-content"></div>
+            </div>
+        </section>
+
+        <!-- THE PUNCHLINE -->
+        <section id="punchline" class="section section--reveal section--punchline" data-section="punchline">
+            <div class="section-inner">
+                <div class="section-content" id="punchline-content"></div>
+            </div>
+        </section>
+
+        <!-- WHAT YOU CAN DO -->
+        <section id="protect" class="section section--reveal" data-section="protect">
+            <div class="section-inner">
+                <h2 class="section-title">What You Can Do</h2>
+                <div class="section-content" id="protect-content"></div>
+            </div>
+        </section>
+
+        <!-- CLOSING -->
+        <section id="closing" class="section section--reveal section--closing" data-section="closing">
+            <div class="section-inner">
+                <div class="section-content" id="closing-content"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
