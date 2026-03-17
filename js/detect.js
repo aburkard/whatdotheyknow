@@ -164,16 +164,26 @@ export function detectHardware() {
 
 export async function detectNetwork() {
     let geo = null;
+
+    // Primary: ipinfo.io — HTTPS, 50k/month free tier
     try {
-        // ip-api.com free tier requires HTTP; try it first, fall back to ipapi.co (HTTPS)
-        const res = await fetch('http://ip-api.com/json/?fields=status,country,regionName,city,zip,timezone,isp,org,query');
+        const res = await fetch('https://ipinfo.io/json');
         if (res.ok) {
-            const data = await res.json();
-            if (data.status === 'success') geo = data;
+            const d = await res.json();
+            geo = {
+                query: d.ip,
+                city: d.city,
+                regionName: d.region,
+                country: d.country,
+                zip: d.postal,
+                timezone: d.timezone,
+                isp: d.org,
+                org: d.org,
+            };
         }
     } catch (e) {}
 
-    // Fallback for HTTPS contexts where HTTP fetch is blocked
+    // Fallback: ipapi.co
     if (!geo) {
         try {
             const res = await fetch('https://ipapi.co/json/');
