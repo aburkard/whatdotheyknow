@@ -263,13 +263,13 @@ function setupSections() {
             el.appendChild(narrate(data.zoom.comment));
         }
 
-        // Physical screen size — only show if the estimate is reasonable
+        // Physical screen size — only show if device guess didn't already identify it
         const ps = data.physicalScreen;
-        if (ps.confident && ps.name) {
+        if (!d.deviceGuess && ps.confident && ps.name) {
             el.appendChild(narrate(
                 `That\u2019s a ${val(ps.estimated + '-inch')} display. ${val(ps.name)}.`
             ));
-        } else if (ps.estimated && ps.estimated >= 4 && ps.estimated <= 50) {
+        } else if (!d.deviceGuess && ps.estimated && ps.estimated >= 4 && ps.estimated <= 50) {
             // Only show fallback estimate if it's a plausible screen size
             // (not a TV and not a watch — avoids embarrassing wrong guesses from farbled resolutions)
             el.appendChild(narrate(
