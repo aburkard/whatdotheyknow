@@ -1103,27 +1103,29 @@ function countSignals() {
     let count = 0;
     // Basics: tz, locale, languages, time
     count += 4;
-    // Device: os, browser, screen(6), touch(2), ua, platform, vendor
+    // Device: os, browser, screen(6), touch(2), ua, platform, vendor, zoom, taskbar, scrollbar, physical screen
+    count += 16;
+    // Hardware: cores, memory, gpu(renderer, vendor, extensions, 3 params), refresh rate, disk
+    count += 10;
+    // Network: ip, city, country, isp, org, connection(4), vpn, dnt, webrtc
     count += 12;
-    // Hardware: cores, memory, gpu(renderer, vendor, extensions, 3 params)
-    count += 8;
-    // Network: ip, city, country, isp, org, connection(4), vpn, dnt
-    count += 11;
     // Fonts
     count += data.fonts?.total || 0;
-    // Canvas
-    count += 1;
-    // Audio
-    count += 2;
-    // Misc: math(3), storage, battery, plugins, voices, keyboard
-    count += 8;
-    // Preferences: darkMode, reducedMotion, highContrast, forcedColors, etc.
-    count += 8;
+    // Canvas + emoji + audio
+    count += 3;
+    // Misc: math(11), storage, battery, plugins, voices, keyboard
+    count += 16;
+    // Preferences: darkMode, reducedMotion, highContrast, forcedColors, hdr, p3, pointer, hover, ad blocker
+    count += 9;
     // Media devices: cameras, mics, speakers
     count += 3;
-    // Multi-monitor, disk, webrtc
-    count += 3;
-    // Behavior: mouse, scroll, time
+    // Multi-monitor
+    count += 1;
+    // WebGPU features
+    count += data.webgpu?.features?.length || 0;
+    // WASM timing, ClientRects(5), codecs(10), CPU arch(3)
+    count += 19;
+    // Behavior: mouse, scroll, time, reading speed, tab switches
     count += 5;
     return count;
 }
