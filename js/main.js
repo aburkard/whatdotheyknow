@@ -1070,7 +1070,7 @@ function scaleComparison(n) {
     // Each comparison is factually accurate and chosen so n exceeds it.
     // One analogy per -illion prefix for clean coverage.
     // Each analogy is factually verified. One per -illion, each unique.
-    if (n >= 1e30) return `For scale: there are about 7 octillion atoms in a human body. Your fingerprint space is even larger.`;              // nonillion
+    if (n >= 1e30) return `For scale: there are an estimated 1 nonillion bacteria on Earth. Your fingerprint space is in that range.`;             // nonillion (~1e30)
     if (n >= 1e27) return `For scale: there are about 7 octillion atoms in a human body. Your fingerprint space is in that range.`;            // octillion (7e27)
     if (n >= 1e24) return `For scale: there are about 200 sextillion stars in the observable universe. Your fingerprint space exceeds that.`;  // septillion (2e23)
     if (n >= 1e21) return `For scale: a single drop of water contains about 1.5 sextillion molecules. Your fingerprint space is in that range.`;  // sextillion (1.5e21)
