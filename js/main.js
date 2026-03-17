@@ -19,7 +19,7 @@ import {
 } from './detect.js';
 
 import { createObserver } from './observer.js';
-import { initAudio, startDrone, playScanTone, playFingerprintTone, fadeDrone, playTick } from './audio.js';
+import { initAudio, startDrone, playScanTone, playFingerprintTone, fadeDrone, playTick, toggleMute } from './audio.js';
 
 import {
     narrate, comment, aside, divider, val, sleep,
@@ -49,6 +49,17 @@ async function start() {
     // Start audio (requires user gesture — the click provides it)
     initAudio();
     startDrone();
+
+    // Add mute button
+    const muteBtn = document.createElement('button');
+    muteBtn.id = 'mute-btn';
+    muteBtn.innerHTML = '\ud83d\udd0a';
+    muteBtn.setAttribute('aria-label', 'Toggle sound');
+    muteBtn.addEventListener('click', () => {
+        const muted = toggleMute();
+        muteBtn.innerHTML = muted ? '\ud83d\udd07' : '\ud83d\udd0a';
+    });
+    document.body.appendChild(muteBtn);
 
     // Start behavior + tab tracking + observer immediately
     data.behaviorTracker = createBehaviorTracker();
@@ -280,6 +291,18 @@ function setupSections() {
     queueSectionReveal('hardware', () => {
         const el = document.getElementById('hardware-content');
         const h = data.hardware;
+        const isBrave = data.privacyProtection?.isBrave;
+        const maybefarbled = isBrave ? ' (maybe farbled)' : '';
+
+        // Show Brave protection notice FIRST so farbled values have context
+        if (data.privacyProtection.isProtected) {
+            el.appendChild(comment(
+                data.privacyProtection.isBrave
+                    ? 'Brave detected \u2014 it randomizes hardware values, canvas, and audio to protect your fingerprint. Some values below may be intentionally wrong.'
+                    : 'Your browser appears to be obfuscating some signals. Values below may not reflect your actual hardware.'
+            ));
+            el.appendChild(divider());
+        }
 
         if (h.gpu.renderer) {
             el.appendChild(narrate(`Your GPU is ${val(h.gpu.renderer)}.`));
@@ -287,9 +310,6 @@ function setupSections() {
                 el.appendChild(comment(h.gpuComment));
             }
         }
-
-        const isBrave = data.privacyProtection?.isBrave;
-        const maybefarbled = isBrave ? ' (maybe farbled)' : '';
 
         el.appendChild(narrate(
             `${val(h.cores + ' CPU cores' + maybefarbled)}${h.memory ? ` and ${val(h.memory + ' GB' + maybefarbled)} of RAM` : ''}.`
@@ -325,19 +345,6 @@ function setupSections() {
             if (data.refreshRate.comment) el.appendChild(comment(data.refreshRate.comment));
         } else {
             el.appendChild(narrate(`Display refresh rate: ${val(data.refreshRate.label)}.`));
-        }
-
-        // Privacy protection detection
-        if (data.privacyProtection.isProtected) {
-            el.appendChild(divider());
-            for (const signal of data.privacyProtection.signals) {
-                el.appendChild(narrate(signal));
-            }
-            el.appendChild(comment(
-                data.privacyProtection.isBrave
-                    ? 'Brave is actively protecting you \u2014 it randomizes hardware values, canvas output, and audio processing to make your fingerprint less stable. Some of the numbers above may be intentionally wrong.'
-                    : 'Your browser appears to be obfuscating some signals. The values above may not reflect your actual hardware.'
-            ));
         }
 
         // VM detection — but not if Brave is farbling values (false positive)

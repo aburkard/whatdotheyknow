@@ -940,6 +940,33 @@ body.is-started {
     background: #000;
 }
 
+/* ---- MUTE BUTTON ---- */
+
+#mute-btn {
+    position: fixed;
+    top: 1.2rem;
+    right: 1.2rem;
+    z-index: 1001;
+    background: none;
+    border: 1px solid var(--border-light);
+    color: var(--text-muted);
+    font-size: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 0.3s ease, border-color 0.3s ease;
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#mute-btn:hover {
+    opacity: 1;
+    border-color: var(--text-muted);
+}
+
 /* ---- OBSERVER BAR ---- */
 
 #observer-bar {

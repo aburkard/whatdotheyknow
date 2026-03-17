@@ -20,6 +20,7 @@ let droneNodes = [];
 let roomToneNode = null;
 
 const MASTER_MAX = 0.25; // Comfortable ambient level at typical system volume
+let isMuted = false;
 
 export function initAudio() {
     try {
@@ -277,4 +278,16 @@ export function playTick() {
 
     osc.start();
     osc.stop(ctx.currentTime + 0.06);
+}
+
+// --- Mute toggle ---
+export function toggleMute() {
+    if (!isActive) return false;
+    isMuted = !isMuted;
+    masterGain.gain.linearRampToValueAtTime(isMuted ? 0 : MASTER_MAX, ctx.currentTime + 0.3);
+    return isMuted;
+}
+
+export function getIsMuted() {
+    return isMuted;
 }
