@@ -170,15 +170,23 @@ export async function detectNetwork() {
         const res = await fetch('https://ipinfo.io/json');
         if (res.ok) {
             const d = await res.json();
+            // Strip AS number prefix from org (e.g., "AS7922 Comcast..." → "Comcast...")
+            const orgClean = (d.org || '').replace(/^AS\d+\s+/, '');
+            // Convert country code to full name
+            let countryName = d.country;
+            try {
+                const dn = new Intl.DisplayNames(['en'], { type: 'region' });
+                countryName = dn.of(d.country) || d.country;
+            } catch (e) {}
             geo = {
                 query: d.ip,
                 city: d.city,
                 regionName: d.region,
-                country: d.country,
+                country: countryName,
                 zip: d.postal,
                 timezone: d.timezone,
-                isp: d.org,
-                org: d.org,
+                isp: orgClean,
+                org: orgClean,
             };
         }
     } catch (e) {}

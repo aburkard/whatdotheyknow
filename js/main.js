@@ -131,6 +131,11 @@ async function start() {
     data.vm = detectVM();
     data.privacyProtection = detectPrivacyProtection();
 
+    // Correct browser name if Brave detected (UA says Chrome)
+    if (data.privacyProtection.isBrave) {
+        data.device.browser = 'Brave';
+    }
+
     // Compute canvas hash + emoji hash
     const emojiData = detectEmojiFingerprint();
     data.emojiHash = await sha256(emojiData.dataUrl);
@@ -236,10 +241,8 @@ function setupSections() {
         const el = document.getElementById('device-content');
         const d = data.device;
 
-        // Show Brave as the browser if detected, not Chrome
-        const browserName = data.privacyProtection?.isBrave ? 'Brave' : d.browser;
         let deviceLine = `You\u2019re running ${val(d.os + (d.osVersion ? ' ' + d.osVersion : ''))}`;
-        deviceLine += ` with ${val(browserName + ' ' + d.browserVersion)}.`;
+        deviceLine += ` with ${val(d.browser + ' ' + d.browserVersion)}.`;
         el.appendChild(narrate(deviceLine));
 
         if (d.deviceGuess) {
